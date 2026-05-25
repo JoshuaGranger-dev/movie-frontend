@@ -47,6 +47,30 @@ function App() {
       })
   }
 
+  function handleToggleWatched(movie) {
+    const updatedWatched = !movie.watched
+
+    fetch(`http://localhost:5000/movies/${movie.id}`, {
+      method: "PATCH", 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ watched: updatedWatched })
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setMovies(
+          movies.map((currentMovie) => {
+            if (currentMovie.id === movie.id) {
+              return { ...currentMovie, watched: updatedWatched }
+            }
+
+            return currentMovie
+          })
+        )
+      })
+  }
+
   return (
     <div>
       <h1>Movies</h1>
@@ -83,6 +107,10 @@ function App() {
           <h2>{movie.title}</h2>
           <p>Rating: {movie.rating}</p>
           <p>{movie.watched ? "Watched" : "Not watched"}</p>
+
+          <button onClick={() => handleToggleWatched(movie)}>
+            Toggle Watched
+          </button>
 
           <button onClick={() => handleDeleteMovie(movie.id)}>
             Delete
