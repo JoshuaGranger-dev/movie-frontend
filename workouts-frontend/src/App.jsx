@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import MovieCard from "./MovieCard"
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -124,19 +125,12 @@ function App() {
       </form>
 
       {movies.map((movie) => (
-        <div key={movie.id}>
-          <h2>{movie.title}</h2>
-          <p>Rating: {movie.rating}</p>
-          <p>{movie.watched ? "Watched" : "Not watched"}</p>
-
-          <button onClick={() => handleToggleWatched(movie)}>
-            Toggle Watched
-          </button>
-
-          <button onClick={() => handleDeleteMovie(movie.id)}>
-            Delete
-          </button>
-        </div>
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          onDeleteMovie={handleDeleteMovie}
+          onToggleWatched={handleToggleWatched}
+        />
       ))}
     </div>
   )
