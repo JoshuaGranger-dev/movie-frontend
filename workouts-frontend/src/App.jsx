@@ -37,6 +37,16 @@ function App() {
       })
   }
 
+  function handleDeleteMovie(id) {
+    fetch(`http://localhost:5000/movies/${id}`, {
+      method: "DELETE"
+    })
+      .then((res) => res.json()) 
+      .then(() => {
+        setMovies(movies.filter((movie) => movie.id !== id))
+      })
+  }
+
   return (
     <div>
       <h1>Movies</h1>
@@ -73,6 +83,10 @@ function App() {
           <h2>{movie.title}</h2>
           <p>Rating: {movie.rating}</p>
           <p>{movie.watched ? "Watched" : "Not watched"}</p>
+
+          <button onClick={() => handleDeleteMovie(movie.id)}>
+            Delete
+          </button>
         </div>
       ))}
     </div>
