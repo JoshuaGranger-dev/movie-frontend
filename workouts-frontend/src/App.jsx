@@ -5,6 +5,7 @@ function App() {
   const [title, setTitle] = useState("")
   const [rating, setRating] = useState("")
   const [watched, setWatched] = useState(false)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:5000/movies")
@@ -28,12 +29,24 @@ function App() {
       },
       body: JSON.stringify(newMovie)
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json().then((data) => {
+          if (!res.ok) {
+            throw new Error(data.message || "Something went wrong")
+          }
+
+          return data
+        })
+      })
       .then((createdMovie) => {
         setMovies([...movies, createdMovie])
         setTitle("")
         setRating("")
-        setWatched(false)
+        setWatched("")
+        setError("")
+      })
+      .catch((err) => {
+        setError(err.message)
       })
   }
 
@@ -74,6 +87,8 @@ function App() {
   return (
     <div>
       <h1>Movies</h1>
+
+      {error && <p>{error}</p>}
 
       <form onSubmit={handleAddMovie}>
         <input
