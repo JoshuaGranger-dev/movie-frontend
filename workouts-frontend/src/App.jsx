@@ -42,7 +42,7 @@ function App() {
         setMovies([...movies, createdMovie])
         setTitle("")
         setRating("")
-        setWatched("")
+        setWatched(false)
         setError("")
       })
       .catch((err) => {
@@ -95,14 +95,20 @@ function App() {
           type="text"
           placeholder="Movie title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value)
+            setError("")
+          }}
         />
 
         <input
           type="text"
           placeholder="Rating"
           value={rating}
-          onChange={(e) => setRating(e.target.value)}
+          onChange={(e) => {
+            setRating(e.target.value)
+            setError("")
+          }}
         />
 
         <label>
