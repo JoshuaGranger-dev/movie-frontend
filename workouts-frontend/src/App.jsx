@@ -96,6 +96,7 @@ function App() {
         rating={rating}
         setRating={setRating}
         watched={watched}
+        setWatched={setWatched}
         error={error}
         setError={setError}
         onAddMovie={handleAddMovie}

@@ -1,4 +1,4 @@
-function MovieForm ({
+function MovieForm({
     title, 
     setTitle,
     rating, 
@@ -34,12 +34,15 @@ function MovieForm ({
 
                 <label>
                     <input 
-                        type="text"
+                        type="checkbox"
                         checked={watched}
                         onChange={(e) => setWatched(e.target.checked)} 
                     />
                     Watched
                 </label>
+
+                <button type="submit">Add Movie</button>
+
             </form>
         </>
     )
