@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import MovieCard from "./MovieCard"
 import MovieForm from "./MovieForm"
+import MovieList from "./MovieList"
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -102,14 +102,11 @@ function App() {
         onAddMovie={handleAddMovie}
       />
 
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onDeleteMovie={handleDeleteMovie}
-          onToggleWatched={handleToggleWatched}
-        />
-      ))}
+      <MovieList
+        movies={movies}
+        onDeleteMovie={handleDeleteMovie}
+        onToggleWatched={handleToggleWatched}
+      />
     </div>
   )
 }
