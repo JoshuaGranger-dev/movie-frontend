@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
+import MovieForm from "./MovieForm"
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -89,40 +90,16 @@ function App() {
     <div>
       <h1>Movies</h1>
 
-      {error && <p>{error}</p>}
-
-      <form onSubmit={handleAddMovie}>
-        <input
-          type="text"
-          placeholder="Movie title"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value)
-            setError("")
-          }}
-        />
-
-        <input
-          type="text"
-          placeholder="Rating"
-          value={rating}
-          onChange={(e) => {
-            setRating(e.target.value)
-            setError("")
-          }}
-        />
-
-        <label>
-          <input
-            type="checkbox"
-            checked={watched}
-            onChange={(e) => setWatched(e.target.checked)}
-          />
-          Watched
-        </label>
-
-        <button type="submit">Add Movie</button>
-      </form>
+      <MovieForm
+        title={title}
+        setTitle={setTitle}
+        rating={rating}
+        setRating={setRating}
+        watched={watched}
+        error={error}
+        setError={setError}
+        onAddMovie={handleAddMovie}
+      />
 
       {movies.map((movie) => (
         <MovieCard
